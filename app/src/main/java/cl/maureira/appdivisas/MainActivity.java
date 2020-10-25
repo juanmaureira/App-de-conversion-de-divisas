@@ -3,6 +3,8 @@ package cl.maureira.appdivisas;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,18 +12,23 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private RequestQueue queue;
     private TextView text;
-    String urlDivisas = "https://free.currconv.com/api/v7/currencies?apiKey=51f15bfbcb6f5d386ff0";
+    String urlDivisas = "https://free.currconv.com/api/v7/convert?q=USD_EUR&compact=ultra&apiKey=51f15bfbcb6f5d386ff0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         text = findViewById(R.id.tvMonedas);
         queue = Volley.newRequestQueue(this);
         getDivisas();
+    }
+
+    public void getConversion(View view){
 
     }
 
@@ -39,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    String data = response.getString("results");
-                    //char[] dataArray = data.toCharArray();
-                    text.setText(data);
+                    String data = response.getString("USD_EUR");
+                    Log.d("Lista", data);
+                    //                    JSONObject data = response.getJSONObject("results");
+//                    Log.d("Lista", String.valueOf(data));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

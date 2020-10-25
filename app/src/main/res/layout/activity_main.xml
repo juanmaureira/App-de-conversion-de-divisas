@@ -12,14 +12,103 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:gravity="center"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tvMonedas2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:gravity="center"
+        android:text="Importe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMonedas" />
+
+    <Spinner
+        android:id="@+id/spMoneda1"
+        android:layout_width="146dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="48dp"
+        android:entries="@array/divisas"
+        app:layout_constraintEnd_toStartOf="@+id/spMoneda2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etImporte" />
+
+    <Spinner
+        android:id="@+id/spMoneda2"
+        android:layout_width="146dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:entries="@array/divisas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etResultado" />
+
+    <EditText
+        android:id="@+id/etImporte"
+        android:layout_width="146dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMonedas2" />
+
+    <EditText
+        android:id="@+id/etResultado"
+        android:layout_width="147dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMonedas2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="48dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="92dp"
+        android:gravity="center"
+        android:text="TO"
+        app:layout_constraintTop_toBottomOf="@+id/tvMonedas2"
+        tools:layout_editor_absoluteX="181dp" />
+
+    <Button
+        android:id="@+id/btnConvertir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="248dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:onClick="getConversion"
+        android:text="Convertir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
