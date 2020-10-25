@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -44,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
         resultado = findViewById(R.id.etResultado);
 
         queue = Volley.newRequestQueue(this);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+        return false;
     }
 
     public void getConversion(View view){
