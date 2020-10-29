@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public EditText resultado;
     public String divisaIn;
     public String divisaOut;
-
+    //public String divisaInAnterior=null, divisaOutAnterior=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +47,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getConversion(View view){
+        String valor1, valor2,conversor;
+
         Spinner spDivisaIn = (Spinner) findViewById(R.id.spMoneda1);
         Spinner spDivisaOut = (Spinner) findViewById(R.id.spMoneda2);
 
         divisaIn = spDivisaIn.getSelectedItem().toString();
         divisaOut = spDivisaOut.getSelectedItem().toString();
 
-        String conversor = divisaIn + "_" + divisaOut;
-        Log.d("divisaIn", divisaIn);
-        String urlDivisas = "https://free.currconv.com/api/v7/convert?q=" + conversor + "&compact=ultra&apiKey=51f15bfbcb6f5d386ff0";
-        Log.d("url", urlDivisas);
-        getDivisas(urlDivisas, conversor);
+        //divisaInAnterior = divisaIn;
+        //divisaOutAnterior = divisaOut;
+
+        valor1 = valor.getText().toString();
+        valor2 = resultado.getText().toString();
+
+        if(valor1.isEmpty() && valor2.isEmpty()){
+            Toast.makeText(this, "Ingrese Valor a Convertir", Toast.LENGTH_LONG).show();
+        }else if(!valor1.isEmpty() && valor2.isEmpty()) {
+            conversor = divisaIn + "_" + divisaOut;
+            Toast.makeText(this, "Conversion " + divisaIn + " -> " + divisaOut, Toast.LENGTH_LONG).show();
+            String urlDivisas = "https://free.currconv.com/api/v7/convert?q=" + conversor + "&compact=ultra&apiKey=51f15bfbcb6f5d386ff0";
+            getDivisas(urlDivisas, conversor, false);
+        }else if(valor1.isEmpty() && !valor2.isEmpty()){
+            conversor = divisaOut + "_" + divisaIn;
+            Toast.makeText(this, "Conversion " + divisaOut + " -> " + divisaIn, Toast.LENGTH_LONG).show();
+            String urlDivisas = "https://free.currconv.com/api/v7/convert?q=" + conversor + "&compact=ultra&apiKey=51f15bfbcb6f5d386ff0";
+            getDivisas(urlDivisas, conversor, true);
+        }
     }
 
-    private void getDivisas(String url, String conversion) {
+    private void getDivisas(String url, String conversion, boolean InOut) {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
@@ -69,8 +85,18 @@ public class MainActivity extends AppCompatActivity {
                     String data = response.getString(conversion);
                     Log.d("Lista", data);
                     Float factor = Float.parseFloat(data);
-                    Float res = Float.valueOf(factor * Float.parseFloat(valor.getText().toString()));
-                    resultado.setText(res.toString());
+                    if(!InOut){
+                        resultado.setText("");
+                        Float res = Float.valueOf(factor * Float.parseFloat(valor.getText().toString()));
+                        resultado.setText(res.toString());
+                        Log.d("Ida",res.toString());
+                    }else{
+                        valor.setText("");
+                        Float res = Float.valueOf(factor * Float.parseFloat(resultado.getText().toString()));
+                        valor.setText(res.toString());
+                        Log.d("Benida",res.toString());
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
